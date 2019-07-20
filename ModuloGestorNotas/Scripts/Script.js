@@ -25,4 +25,30 @@ $(document).ready(function () {
         }
     });
     $('#TablaSecciones').jtable('load');
+
+    $('#TablaMaterias').jtable({
+        title: 'Materias del Centro Educativo',
+        paging: true,
+        pageSize: 10,
+        sorting: true,
+        defaultSorting: 'Nombre ASC',
+
+        actions: {
+            listAction: '/Materias/Get',
+            createAction: '/Materias/Create',
+            updateAction: '/Materias/Edit',
+            deleteAction: '/Materias/Delete'
+        },
+        fields: {
+            Id: {
+                key: true,
+                list: false
+            },
+            Nombre: {
+                title: 'Materia',
+                width: '15%'
+            }
+        }
+    });
+    $('#TablaMaterias').jtable('load');
 });
