@@ -9,11 +9,15 @@ namespace ModuloGestorNotas.Models
     {
         public int Id { get; set; }
 
+        public string Codigo { get; set; }
         public int SeccionId { get; set; }
         public Seccion Seccion { get; set; }
 
         public int MateriaId { get; set; }
         public Materia Materia { get; set; }
+
+        public int PeriodoId { get; set; }
+        public Periodo Periodo { get; set; }
 
     }
 }

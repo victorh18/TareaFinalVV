@@ -184,6 +184,10 @@
     <Compile Include="Migrations\201907192247204_TablaPeriodo.Designer.cs">
       <DependentUpon>201907192247204_TablaPeriodo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907210147474_FixModels.cs" />
+    <Compile Include="Migrations\201907210147474_FixModels.Designer.cs">
+      <DependentUpon>201907210147474_FixModels.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Grupo.cs" />
@@ -474,6 +478,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907192247204_TablaPeriodo.resx">
       <DependentUpon>201907192247204_TablaPeriodo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907210147474_FixModels.resx">
+      <DependentUpon>201907210147474_FixModels.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -14,8 +14,5 @@ namespace ModuloGestorNotas.Models
         public int GrupoId { get; set; }
         public Grupo Grupo { get; set; }
 
-        public int PeriodoId { get; set; }
-        public Periodo Periodo { get; set; }
-
     }
 }
