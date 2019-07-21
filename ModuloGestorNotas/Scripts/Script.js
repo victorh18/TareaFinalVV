@@ -52,6 +52,44 @@ $(document).ready(function () {
     });
     $('#TablaMaterias').jtable('load');
 
+    $('#TablaPeriodos').jtable({
+        title: 'Periodos',
+        paging: true,
+        pageSize: 5,
+        sorting: true,
+        defaultSorting: 'Codigo ASC',
+
+        actions: {
+            listAction: '/Periodos/Get',
+            createAction: '/Periodos/Create',
+            updateAction: '/Periodos/Edit',
+            deleteAction: '/Periodos/Delete'
+        },
+        fields: {
+            Id: {
+                key: true,
+                list: false
+            },
+            Codigo: {
+                title: 'Codigo',
+                width: '15%',
+                create: false,
+                edit: false
+            },
+            Anio: {
+                title: 'Año',
+                width: '15%',
+                list: false
+            },
+            Cuatrimestre: {
+                title: 'Cuatrimestre',
+                width: '15%',
+                options: { 1:'C1', 2:'C2', 3:'C3'},
+                list: false
+            }
+        }
+    });
+    $('#TablaPeriodos').jtable('load');
 
     $('#TablaGrupos').jtable({
         title: 'Grupos del Centro Educativo',

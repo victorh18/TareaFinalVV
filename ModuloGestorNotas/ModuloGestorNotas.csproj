@@ -172,6 +172,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MateriasController.cs" />
+    <Compile Include="Controllers\PeriodosController.cs" />
     <Compile Include="Controllers\SeccionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -459,6 +460,7 @@
     <Content Include="Scripts\jtable\themes\basic\jtable_basic.less" />
     <Content Include="Views\Materias\Index.cshtml" />
     <Content Include="Views\Grupos\Index.cshtml" />
+    <Content Include="Views\Periodos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
