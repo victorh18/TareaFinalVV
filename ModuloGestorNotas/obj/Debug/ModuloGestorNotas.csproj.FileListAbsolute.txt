@@ -213,3 +213,4 @@ C:\Users\JC97\Desktop\ModuloGestorNotas\ModuloGestorNotas\obj\Debug\ModuloGestor
 C:\Users\JC97\Desktop\ModuloGestorNotas\ModuloGestorNotas\obj\Debug\ModuloGestorNotas.dll
 C:\Users\JC97\Desktop\ModuloGestorNotas\ModuloGestorNotas\obj\Debug\ModuloGestorNotas.pdb
 C:\Users\JC97\Desktop\ModuloGestorNotas\ModuloGestorNotas\obj\Debug\ModuloGestorNotas.Migrations.FixModels.resources
+C:\Users\JC97\Desktop\ModuloGestorNotas\ModuloGestorNotas\obj\Debug\ModuloGestorNotas.Migrations.AddNotalTotalPropertyAtNotaModel.resources
