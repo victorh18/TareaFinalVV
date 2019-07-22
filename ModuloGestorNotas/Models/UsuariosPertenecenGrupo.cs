@@ -9,10 +9,13 @@ namespace ModuloGestorNotas.Models
     {
         public int Id { get; set; }
 
-        public int UsuarioId { get; set; }
+        public string UsuarioId { get; set; }
 
         public int GrupoId { get; set; }
         public Grupo Grupo { get; set; }
+
+        public int NotaId { get; set; }
+        public Nota Nota { get; set; }
 
     }
 }

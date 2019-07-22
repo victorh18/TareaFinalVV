@@ -193,6 +193,10 @@
     <Compile Include="Migrations\201907211100005_AddNotalTotalPropertyAtNotaModel.Designer.cs">
       <DependentUpon>201907211100005_AddNotalTotalPropertyAtNotaModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907222115367_FixModels1.cs" />
+    <Compile Include="Migrations\201907222115367_FixModels1.Designer.cs">
+      <DependentUpon>201907222115367_FixModels1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Grupo.cs" />
@@ -491,6 +495,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907211100005_AddNotalTotalPropertyAtNotaModel.resx">
       <DependentUpon>201907211100005_AddNotalTotalPropertyAtNotaModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907222115367_FixModels1.resx">
+      <DependentUpon>201907222115367_FixModels1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

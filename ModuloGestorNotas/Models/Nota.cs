@@ -14,8 +14,5 @@ namespace ModuloGestorNotas.Models
         public int ParcialFinal { get; set; }
         public int NotaTotal { get; set; }
 
-        public int UsuariosPertenecenGrupoId { get; set; }
-        public UsuariosPertenecenGrupo usuariosPertenecenGrupo { get; set; }
-
     }
 }
