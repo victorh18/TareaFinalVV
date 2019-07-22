@@ -132,5 +132,4 @@ $(document).ready(function () {
         }
     });
     $('#TablaGrupos').jtable('load');
-
 });
