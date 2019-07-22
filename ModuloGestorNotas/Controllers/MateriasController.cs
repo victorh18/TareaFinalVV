@@ -93,5 +93,25 @@ namespace ModuloGestorNotas.Controllers
             }
         }
 
+        public JsonResult GetMaterias()
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            try
+            {
+                List<Options> options = new List<Options>();
+                List<Materia> lstMaterias = new List<Materia>();
+                lstMaterias = db.Materia.ToList();
+                foreach (var item in lstMaterias)
+                {
+                    options.Add(new Options { DisplayText = item.Nombre, Value = item.Id.ToString() });
+                }
+                return Json(new { Result = "OK", Options = options }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "ERROR", Message = ex.Message });
+            }
+        }
+
     }
 }

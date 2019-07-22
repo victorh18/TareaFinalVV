@@ -90,13 +90,14 @@ $(document).ready(function () {
         }
     });
     $('#TablaPeriodos').jtable('load');
-
+    
+ 
     $('#TablaGrupos').jtable({
         title: 'Grupos del Centro Educativo',
         paging: true,
         pageSize: 10,
         sorting: true,
-        defaultSorting: 'Materia ASC',
+        defaultSorting: 'MateriaId ASC',
 
         actions: {
             listAction: '/Grupos/Get',
@@ -109,15 +110,27 @@ $(document).ready(function () {
                 key: true,
                 list: false
             },
-            Seccion: {
-                title: 'Seccion',
+            Codigo: {
+                title: 'Codigo',
                 width: '15%'
             },
-            Materia: {
+            SeccionId: {
+                title: 'Seccion',
+                width: '15%',
+                options: '/seccion/getsecciones'
+            },
+            MateriaId: {
                 title: 'Materia',
-                width: '15%'
+                width: '15%',
+                options: '/materias/getmaterias'
+            },
+            PeriodoId: {
+                title: 'Periodo',
+                width: '15%',
+                options: '/periodos/getperiodos'
             }
         }
     });
     $('#TablaGrupos').jtable('load');
+
 });

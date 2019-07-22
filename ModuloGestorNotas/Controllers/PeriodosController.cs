@@ -95,6 +95,26 @@ namespace ModuloGestorNotas.Controllers
             }
         }
 
+        public JsonResult GetPeriodos()
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            try
+            {
+                List<Options> options = new List<Options>();
+                List<Periodo> lstPeriodos = new List<Periodo>();
+                lstPeriodos = db.Periodo.ToList();
+                foreach (var item in lstPeriodos)
+                {
+                    options.Add(new Options { DisplayText = item.Codigo, Value = item.Id.ToString() });
+                }
+                return Json(new { Result = "OK", Options = options }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "ERROR", Message = ex.Message });
+            }
+        }
+
 
     }
 }

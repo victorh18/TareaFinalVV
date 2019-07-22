@@ -1,4 +1,5 @@
 ﻿using ModuloGestorNotas.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -15,6 +16,7 @@ namespace ModuloGestorNotas.Controllers
         {
             return View();
         }
+
         public JsonResult Get(int jtStartIndex = 0, int jtPageSize = 0, string jtSorting = null)
         {
             ApplicationDbContext db = new ApplicationDbContext();
@@ -85,6 +87,26 @@ namespace ModuloGestorNotas.Controllers
                 db.Seccion.Remove(seccion);
                 db.SaveChanges();
                 return Json(new { Result = "OK" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "ERROR", Message = ex.Message });
+            }
+        }
+
+        public JsonResult GetSecciones()
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            try
+            {
+                List<Options> options = new List<Options>();
+                List<Seccion> lstSecciones = new List<Seccion>();
+                lstSecciones = db.Seccion.ToList();
+                foreach (var item in lstSecciones)
+                {
+                    options.Add(new Options { DisplayText = item.Nombre, Value = item.Id.ToString() });
+                }
+                return Json(new { Result = "OK", Options = options }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
