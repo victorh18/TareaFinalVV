@@ -11,12 +11,47 @@
     <h4>Cree una cuenta nueva.</h4>
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Nombre, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Apellido, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Apellido, new { @class = "form-control" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Sexo, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            <select class="form-control" name="Sexo" id="Sexo">
+                <option value="F">Femenino</option>
+                <option value="M">Masculino</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.FechaDeNacimiento, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            <input class="form-control" type="date" name="FechaDeNacimiento" id="FechaDeNacimiento" value="" />
+        </div>
+    </div>
+
+
     <div class="form-group">
         @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
         </div>
     </div>
+
     <div class="form-group">
         @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">

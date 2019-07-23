@@ -197,6 +197,14 @@
     <Compile Include="Migrations\201907222115367_FixModels1.Designer.cs">
       <DependentUpon>201907222115367_FixModels1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907222300366_ColumnasIdentityUser.cs" />
+    <Compile Include="Migrations\201907222300366_ColumnasIdentityUser.Designer.cs">
+      <DependentUpon>201907222300366_ColumnasIdentityUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907230105512_TriggerAssignRole.cs" />
+    <Compile Include="Migrations\201907230105512_TriggerAssignRole.Designer.cs">
+      <DependentUpon>201907230105512_TriggerAssignRole.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Grupo.cs" />
@@ -498,6 +506,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907222115367_FixModels1.resx">
       <DependentUpon>201907222115367_FixModels1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907222300366_ColumnasIdentityUser.resx">
+      <DependentUpon>201907222300366_ColumnasIdentityUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907230105512_TriggerAssignRole.resx">
+      <DependentUpon>201907230105512_TriggerAssignRole.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

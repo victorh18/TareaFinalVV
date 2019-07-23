@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace ModuloGestorNotas.Models
@@ -64,6 +65,21 @@ namespace ModuloGestorNotas.Models
 
     public class RegisterViewModel
     {
+        [Required]
+        [Display(Name = "Nombre")]
+        public string Nombre { get; set; }
+
+        [Required]
+        [Display(Name = "Apellido")]
+        public string Apellido { get; set; }
+
+        [Display(Name = "Sexo")]
+        public string Sexo { get; set; }
+
+        [Required]
+        [Display(Name = "Fecha de Nacimiento")]
+        public DateTime FechaDeNacimiento{ get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Correo electrónico")]

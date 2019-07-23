@@ -215,3 +215,5 @@ C:\Users\JC97\Desktop\ModuloGestorNotas\ModuloGestorNotas\obj\Debug\ModuloGestor
 C:\Users\JC97\Desktop\ModuloGestorNotas\ModuloGestorNotas\obj\Debug\ModuloGestorNotas.Migrations.FixModels.resources
 C:\Users\JC97\Desktop\ModuloGestorNotas\ModuloGestorNotas\obj\Debug\ModuloGestorNotas.Migrations.AddNotalTotalPropertyAtNotaModel.resources
 C:\Users\JC97\Desktop\ModuloGestorNotas\ModuloGestorNotas\obj\Debug\ModuloGestorNotas.Migrations.FixModels1.resources
+C:\Users\JC97\Desktop\ModuloGestorNotas\ModuloGestorNotas\obj\Debug\ModuloGestorNotas.Migrations.ColumnasIdentityUser.resources
+C:\Users\JC97\Desktop\ModuloGestorNotas\ModuloGestorNotas\obj\Debug\ModuloGestorNotas.Migrations.TriggerAssignRole.resources

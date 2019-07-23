@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -16,6 +17,12 @@ namespace ModuloGestorNotas.Models
             // Agregar aquí notificaciones personalizadas de usuario
             return userIdentity;
         }
+
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+        public string Sexo { get; set; }
+        public DateTime FechaDeNacimiento { get; set; }
+
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
