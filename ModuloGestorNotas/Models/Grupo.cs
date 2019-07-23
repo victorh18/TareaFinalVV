@@ -21,10 +21,12 @@ namespace ModuloGestorNotas.Models
 
     }
 
+    //Esta clase se utiliza como modelo de datos en la seleccion de Grupos por parte de los estudiantes y Asignacion de profesores a grupos
     public class Seleccion
     {
         public int Id { get; set; }
         public string EstadoSeleccion { get; set; }
+        public string UserId {get;set;}
         public string Grupo { get; set; }
         public string Seccion { get; set; }
         public string Materia { get; set; }

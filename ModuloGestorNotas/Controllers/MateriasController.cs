@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace ModuloGestorNotas.Controllers
 {
+    [Authorize(Roles = "SuperAdmin")]
     public class MateriasController : Controller
     {
         // GET: Materias
