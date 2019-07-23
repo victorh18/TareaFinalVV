@@ -20,4 +20,15 @@ namespace ModuloGestorNotas.Models
         public Periodo Periodo { get; set; }
 
     }
+
+    public class Seleccion
+    {
+        public int Id { get; set; }
+        public string EstadoSeleccion { get; set; }
+        public string Grupo { get; set; }
+        public string Seccion { get; set; }
+        public string Materia { get; set; }
+        public string Periodo { get; set; }
+
+    }
 }

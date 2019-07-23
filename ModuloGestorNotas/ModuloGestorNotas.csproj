@@ -474,6 +474,7 @@
     <Content Include="Views\Materias\Index.cshtml" />
     <Content Include="Views\Grupos\Index.cshtml" />
     <Content Include="Views\Periodos\Index.cshtml" />
+    <Content Include="Views\Grupos\estudiantesSeleccionanGrupos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

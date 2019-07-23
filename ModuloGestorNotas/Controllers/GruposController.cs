@@ -5,17 +5,24 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 
 namespace ModuloGestorNotas.Controllers
 {
+    //[Authorize(Roles = "SuperAdmin")]
+    //[Authorize(Roles = "Profesor")]
+    //[Authorize(Roles = "Estudiante")]
     public class GruposController : Controller
     {
+        #region Grupos
         // GET: Grupos
+        [Authorize(Roles = "SuperAdmin")]
         public ActionResult Index()
         {
             return View();
         }
 
+        [Authorize(Roles = "SuperAdmin")]
         public JsonResult Get(int jtStartIndex = 0, int jtPageSize = 0, string jtSorting = null)
         {
             ApplicationDbContext db = new ApplicationDbContext();
@@ -110,6 +117,7 @@ namespace ModuloGestorNotas.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "SuperAdmin")]
         public JsonResult Create(Grupo Model)
         {
             ApplicationDbContext db = new ApplicationDbContext();
@@ -126,6 +134,7 @@ namespace ModuloGestorNotas.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "SuperAdmin")]
         public JsonResult Edit(Grupo Model)
         {
             ApplicationDbContext db = new ApplicationDbContext();
@@ -142,6 +151,7 @@ namespace ModuloGestorNotas.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "SuperAdmin")]
         public JsonResult Delete(int ID)
         {
             ApplicationDbContext db = new ApplicationDbContext();
@@ -158,6 +168,108 @@ namespace ModuloGestorNotas.Controllers
             }
         }
 
+        #endregion
+
+        #region Estudiantes Seleccionan Grupos
+        [Route("Grupos/Seleccion")]
+        [Authorize(Roles = "Estudiante")]
+        public ActionResult estudiantesSeleccionanGrupos()
+        {
+            return View();
+        }
+
+        [Route("Grupos/Seleccion/Get")]
+        [Authorize(Roles = "Estudiante")]
+        public JsonResult getEstudiantesSeleccionanGrupos(int jtStartIndex = 0, int jtPageSize = 0, string jtSorting = null)
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            try
+            {
+                var current_id = User.Identity.GetUserId();
+                List<Seleccion> lstSeleccion = new List<Seleccion>();
+
+                foreach (var item in db.Grupo.ToList())
+                {
+                    bool checkIsRegisteredInGroup = (db.UsuariosPertenecenGrupos.ToList()
+                                                .Where(t => t.UsuarioId == User.Identity.GetUserId())
+                                                .Where(t => t.GrupoId == item.Id)
+                                                .Select(t => t).FirstOrDefault() == null)? false: true;
+                    lstSeleccion.Add(
+                        new Seleccion
+                        {
+                            Id = item.Id,
+                            EstadoSeleccion = checkIsRegisteredInGroup? 1.ToString(): 0.ToString(),
+                            Grupo = item.Codigo,
+                            Materia = db.Materia.ToList().Where(t => t.Id == item.MateriaId).Select(t => t).FirstOrDefault().Nombre,
+                            Periodo = db.Periodo.ToList().Where(t => t.Id == item.PeriodoId).Select(t => t).FirstOrDefault().Codigo,
+                            Seccion = db.Seccion.ToList().Where(t => t.Id == item.SeccionId).Select(t => t).FirstOrDefault().Nombre
+                        }); 
+                }
+
+                switch (jtSorting)
+                {
+                    case "Materia ASC":
+                        lstSeleccion = lstSeleccion.OrderBy(t => t.Materia).ToList();
+                        break;
+                    case "Materia DESC":
+                        lstSeleccion = lstSeleccion.OrderByDescending(t => t.Materia).ToList(); ;
+                        break;
+                }
+
+                lstSeleccion = lstSeleccion.Skip(jtStartIndex).Take(jtPageSize).ToList();
+                int TotalRecords = db.Grupo.Count();
+                return Json(new { Result = "OK", Records = lstSeleccion, TotalRecordCount = TotalRecords }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "ERROR", Message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpPost]
+        [Route("Grupos/Seleccion/Edit")]
+        [Authorize(Roles = "Estudiante")]
+        public JsonResult editEstudiantesSeleccionanGrupos(Seleccion Model)
+        {
+            var current_id = User.Identity.GetUserId();
+            ApplicationDbContext db = new ApplicationDbContext();
+            try
+            {
+                UsuariosPertenecenGrupo upg = new UsuariosPertenecenGrupo();
+                UsuariosPertenecenGrupo upg_actual = db.UsuariosPertenecenGrupos.ToList()
+                                            .Where(t => t.UsuarioId == User.Identity.GetUserId())
+                                            .Where(t => t.GrupoId == Model.Id)
+                                            .Select(t => t).FirstOrDefault();
+                bool checkIsRegisteredInGroup = (upg_actual == null) ? false : true;
+                if (checkIsRegisteredInGroup && (Model.EstadoSeleccion == "0"))
+                {
+                    Nota nota = db.Nota.Find(db.UsuariosPertenecenGrupos.Where(t => t.GrupoId == upg_actual.GrupoId).FirstOrDefault().NotaId);
+                    db.Nota.Remove(nota);
+                    db.UsuariosPertenecenGrupos.Remove(upg_actual);
+                    db.SaveChanges();
+                }
+                else if(!checkIsRegisteredInGroup && (Model.EstadoSeleccion == "1"))
+                {
+                    Nota nota = new Nota () { PrimerParcial = 0, SegundoParcial = 0, ParcialFinal = 0, NotaTotal = 0 };
+                    db.Nota.Add(nota);
+                    db.SaveChanges();
+                    db.UsuariosPertenecenGrupos.Add(new UsuariosPertenecenGrupo { GrupoId = Model.Id, UsuarioId = current_id, NotaId = nota.Id});
+                    db.SaveChanges();
+                }
+                else
+                {
+                    //Console.WriteLine("Do Nothing");
+                }
+
+                return Json(new { Result = "OK" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "ERROR", Message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        #endregion
 
     }
 }

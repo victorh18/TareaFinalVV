@@ -91,7 +91,6 @@ $(document).ready(function () {
     });
     $('#TablaPeriodos').jtable('load');
     
- 
     $('#TablaGrupos').jtable({
         title: 'Grupos del Centro Educativo',
         paging: true,
@@ -132,4 +131,53 @@ $(document).ready(function () {
         }
     });
     $('#TablaGrupos').jtable('load');
+
+    $('#TablaSeleccion').jtable({
+        title: 'Seleccion de Materias',
+        paging: true,
+        pageSize: 10,
+        sorting: true,
+        defaultSorting: 'Materia ASC',
+
+        actions: {
+            listAction: '/Grupos/Seleccion/Get',
+            updateAction: '/Grupos/Seleccion/Edit'
+        },
+        fields: {
+            Id: {
+                key: true,
+                list: false
+            },
+            EstadoSeleccion: {
+                title: 'Estado de Seleccion',
+                width: '15%',
+                options: { 0: 'No Registrado', 1: 'Registrado'},
+                edit: true
+            },
+            Grupo: {
+                title: 'Grupo',
+                width: '15%',
+                edit: false
+            },
+            Seccion: {
+                title: 'Seccion',
+                width: '15%',
+                //options: '/seccion/getsecciones',
+                edit: false
+            },
+            Materia: {
+                title: 'Materia',
+                width: '15%',
+                //options: '/materias/getmaterias',
+                edit: false
+            },
+            Periodo: {
+                title: 'Periodo',
+                width: '15%',
+                //options: '/periodos/getperiodos',
+                edit: false
+            }
+        }
+    });
+    $('#TablaSeleccion').jtable('load');
 });
