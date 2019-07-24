@@ -22,11 +22,27 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Secciones", "Index", "Seccion")</li>
-                    <li>@Html.ActionLink("Materias", "Index", "Materias")</li>
-                    <li>@Html.ActionLink("Períodos", "Index", "Periodos")</li>
-                    <li>@Html.ActionLink("Grupos", "Index", "Grupos")</li>
-                    <li>@Html.ActionLink("Seleccion de Materias", "estudiantesSeleccionanGrupos", "Grupos")</li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        var s = true;
+                        if (User.IsInRole("SuperAdmin"))
+                        {
+                            <li>@Html.ActionLink("Secciones", "Index", "Seccion")</li>
+                            <li>@Html.ActionLink("Materias", "Index", "Materias")</li>
+                            <li>@Html.ActionLink("Períodos", "Index", "Periodos")</li>
+                            <li>@Html.ActionLink("Grupos", "Index", "Grupos")</li>
+                            <li>@Html.ActionLink("Asignar Profesores a Grupos", "", "")</li>
+                        }
+                        if (User.IsInRole("Profesor"))
+                        {
+                            <li>@Html.ActionLink("Asignar Notas", "", "")</li>
+                        }
+                        if (User.IsInRole("Estudiante"))
+                        {
+                            <li>@Html.ActionLink("Seleccion de Materias", "estudiantesSeleccionanGrupos", "Grupos")</li>
+                            <li>@Html.ActionLink("Ver Notas", "", "")</li>
+                        }
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
