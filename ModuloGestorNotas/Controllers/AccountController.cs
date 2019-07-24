@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -481,5 +483,34 @@ namespace ModuloGestorNotas.Controllers
             }
         }
         #endregion
+
+        [Route("Account/Get/Profesores/")]
+        [Authorize(Roles = "SuperAdmin")]
+        public JsonResult getProfesores()
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            try
+
+            {
+                List<Options> options = new List<Options>();
+                List<ApplicationUser> lstUsers = new List<ApplicationUser>();
+                lstUsers = db.Users.Include(u => u.Roles).ToList();
+                foreach (var item in lstUsers)
+                {
+                    if(item.Roles.Where(t => t.RoleId == "2").FirstOrDefault() != null)
+                    options.Add(new Options { DisplayText = item.Nombre+" "+item.Apellido, Value = item.Id.ToString() });
+                    else
+                    {
+                        //Do Nothing
+                    }
+                }
+                options.Add(new Options { DisplayText = "Sin Asignar", Value = "1"});
+                return Json(new { Result = "OK", Options = options }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "ERROR", Message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
     }
 }

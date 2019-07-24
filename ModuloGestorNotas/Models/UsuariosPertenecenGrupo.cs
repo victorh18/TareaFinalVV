@@ -14,7 +14,7 @@ namespace ModuloGestorNotas.Models
         public int GrupoId { get; set; }
         public Grupo Grupo { get; set; }
 
-        public int NotaId { get; set; }
+        public int? NotaId { get; set; }
         public Nota Nota { get; set; }
 
     }

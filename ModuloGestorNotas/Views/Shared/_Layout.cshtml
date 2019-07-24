@@ -31,7 +31,7 @@
                             <li>@Html.ActionLink("Materias", "Index", "Materias")</li>
                             <li>@Html.ActionLink("Períodos", "Index", "Periodos")</li>
                             <li>@Html.ActionLink("Grupos", "Index", "Grupos")</li>
-                            <li>@Html.ActionLink("Asignar Profesores a Grupos", "", "")</li>
+                            <li>@Html.ActionLink("Asignar Profesores a Grupos", "administradoresAsignanProfesores", "Grupos")</li>
                         }
                         if (User.IsInRole("Profesor"))
                         {

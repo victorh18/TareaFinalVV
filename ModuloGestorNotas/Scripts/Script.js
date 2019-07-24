@@ -162,22 +162,65 @@ $(document).ready(function () {
             Seccion: {
                 title: 'Seccion',
                 width: '15%',
-                //options: '/seccion/getsecciones',
                 edit: false
             },
             Materia: {
                 title: 'Materia',
                 width: '15%',
-                //options: '/materias/getmaterias',
                 edit: false
             },
             Periodo: {
                 title: 'Periodo',
                 width: '15%',
-                //options: '/periodos/getperiodos',
                 edit: false
             }
         }
     });
     $('#TablaSeleccion').jtable('load');
+
+    $('#TablaAsignacionProfesores').jtable({
+        title: 'Asignacion de Profesores',
+        paging: true,
+        pageSize: 10,
+        sorting: true,
+        defaultSorting: 'Materia ASC',
+
+        actions: {
+            listAction: '/Grupos/Asignacion/Get',
+            updateAction: '/Grupos/Asignacion/Edit'
+        },
+        fields: {
+            Id: {
+                key: true,
+                list: false
+            },
+            EstadoSeleccion: {
+                title: 'Profesor',
+                width: '15%',
+                options: '/Account/Get/Profesores',
+                edit: true
+            },
+            Grupo: {
+                title: 'Grupo',
+                width: '15%',
+                edit: false
+            },
+            Seccion: {
+                title: 'Seccion',
+                width: '15%',
+                edit: false
+            },
+            Materia: {
+                title: 'Materia',
+                width: '15%',
+                edit: false
+            },
+            Periodo: {
+                title: 'Periodo',
+                width: '15%',
+                edit: false
+            }
+        }
+    });
+    $('#TablaAsignacionProfesores').jtable('load');
 });

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ModuloGestorNotas.Controllers
 {
@@ -14,6 +15,19 @@ namespace ModuloGestorNotas.Controllers
     //[Authorize(Roles = "Estudiante")]
     public class GruposController : Controller
     {
+        enum Rol
+        {
+            Admin = 1,
+            Profesor = 2,
+            Estudiante = 3
+        }
+
+        enum SolicitudInscripcion
+        {
+            Desinscripcion = 0,
+            Inscripcion = 1
+        }
+
         #region Grupos
         // GET: Grupos
         [Authorize(Roles = "SuperAdmin")]
@@ -198,7 +212,7 @@ namespace ModuloGestorNotas.Controllers
                         new Seleccion
                         {
                             Id = item.Id,
-                            EstadoSeleccion = checkIsRegisteredInGroup? 1.ToString(): 0.ToString(),
+                            EstadoSeleccion = checkIsRegisteredInGroup? ((int)SolicitudInscripcion.Inscripcion).ToString() : ((int)SolicitudInscripcion.Desinscripcion).ToString(),
                             Grupo = item.Codigo,
                             Materia = db.Materia.ToList().Where(t => t.Id == item.MateriaId).Select(t => t).FirstOrDefault().Nombre,
                             Periodo = db.Periodo.ToList().Where(t => t.Id == item.PeriodoId).Select(t => t).FirstOrDefault().Codigo,
@@ -235,20 +249,19 @@ namespace ModuloGestorNotas.Controllers
             ApplicationDbContext db = new ApplicationDbContext();
             try
             {
-                UsuariosPertenecenGrupo upg = new UsuariosPertenecenGrupo();
                 UsuariosPertenecenGrupo upg_actual = db.UsuariosPertenecenGrupos.ToList()
                                             .Where(t => t.UsuarioId == User.Identity.GetUserId())
                                             .Where(t => t.GrupoId == Model.Id)
                                             .Select(t => t).FirstOrDefault();
                 bool checkIsRegisteredInGroup = (upg_actual == null) ? false : true;
-                if (checkIsRegisteredInGroup && (Model.EstadoSeleccion == "0"))
+                if (checkIsRegisteredInGroup && (Model.EstadoSeleccion == SolicitudInscripcion.Desinscripcion.ToString()))
                 {
                     Nota nota = db.Nota.Find(db.UsuariosPertenecenGrupos.Where(t => t.GrupoId == upg_actual.GrupoId).FirstOrDefault().NotaId);
                     db.Nota.Remove(nota);
                     db.UsuariosPertenecenGrupos.Remove(upg_actual);
                     db.SaveChanges();
                 }
-                else if(!checkIsRegisteredInGroup && (Model.EstadoSeleccion == "1"))
+                else if(!checkIsRegisteredInGroup && (Model.EstadoSeleccion == SolicitudInscripcion.Inscripcion.ToString()))
                 {
                     Nota nota = new Nota () { PrimerParcial = 0, SegundoParcial = 0, ParcialFinal = 0, NotaTotal = 0 };
                     db.Nota.Add(nota);
@@ -272,6 +285,153 @@ namespace ModuloGestorNotas.Controllers
         #endregion
 
         #region Administradores Asignan Profesores a Grupos
+
+        [Route("Grupos/Asignacion")]
+        [Authorize(Roles = "SuperAdmin")]
+        public ActionResult administradoresAsignanProfesores()
+        {
+            return View();
+        }
+
+        [Route("Grupos/Asignacion/Get")]
+        [Authorize(Roles = "SuperAdmin")]
+        public JsonResult getAdministradoresAsignanProfesores(int jtStartIndex = 0, int jtPageSize = 0, string jtSorting = null)
+        {
+            ApplicationDbContext db = new ApplicationDbContext();
+            try
+            {
+                List<Seleccion> lstSeleccion = new List<Seleccion>();
+                //Buscamos los Usuarios con Rol de Profesor
+                IdentityRole Profesores = db.Roles.Include(t=> t.Users).Where(t => t.Id == ((int)Rol.Profesor).ToString()).FirstOrDefault();
+
+                foreach (var grupo in db.Grupo.Include(t => t.Materia).Include(t => t.Periodo).Include(t => t.Seccion).ToList())
+                {
+                    lstSeleccion.Add(
+                           new Seleccion
+                           {
+                               Id = grupo.Id,
+                               Grupo = grupo.Codigo,
+                               EstadoSeleccion = "1",
+                               Materia = grupo.Materia.Nombre,
+                               Periodo = grupo.Periodo.Codigo,
+                               Seccion = grupo.Seccion.Nombre
+                           });
+                }
+
+                foreach (var profesor in Profesores.Users)
+                {
+                    foreach (var grupo in db.Grupo.Include(t => t.Materia).Include(t => t.Periodo).Include(t => t.Seccion).ToList())
+                    {
+                        bool checkIsRegisteredInGroup = (db.UsuariosPertenecenGrupos
+                                                .Where(t => t.UsuarioId == profesor.UserId)
+                                                .Where(t => t.GrupoId == grupo.Id)
+                                                .Select(t => t).FirstOrDefault() == null) ? false : true;
+                        if (checkIsRegisteredInGroup)
+                        {
+                            lstSeleccion.RemoveAll(t => t.Id == grupo.Id);
+                            lstSeleccion.Add(
+                            new Seleccion
+                            {
+                                Id = grupo.Id,
+                                //Si el profesor existe en un grupo, se registrara su nombre, de lo contrario, no
+                                EstadoSeleccion = checkIsRegisteredInGroup ? db.Users.Where(t => t.Id == profesor.UserId).FirstOrDefault().Id: null,
+                                Grupo = grupo.Codigo,
+                                Materia = grupo.Materia.Nombre,
+                                Periodo = grupo.Periodo.Codigo,
+                                Seccion = grupo.Seccion.Nombre
+                        });
+
+                        }
+                        else
+                        {
+                            //Do Nothing
+                        }
+
+                    }
+                }
+
+                switch (jtSorting)
+                {
+                    case "Materia ASC":
+                        lstSeleccion = lstSeleccion.OrderBy(t => t.Materia).ToList();
+                        break;
+                    case "Materia DESC":
+                        lstSeleccion = lstSeleccion.OrderByDescending(t => t.Materia).ToList(); ;
+                        break;
+                }
+
+                lstSeleccion = lstSeleccion.Skip(jtStartIndex).Take(jtPageSize).ToList();
+                int TotalRecords = db.Grupo.Count();
+                return Json(new { Result = "OK", Records = lstSeleccion, TotalRecordCount = TotalRecords }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "ERROR", Message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpPost]
+        [Route("Grupos/Asignacion/Edit")]
+        [Authorize(Roles = "SuperAdmin")]
+        public JsonResult editAdministradoresAsignanProfesores(Seleccion Model)
+        {
+            //En este contexto Model.EstadoSeleccion posee el id del profesor
+            ApplicationDbContext db = new ApplicationDbContext();
+            try
+            {
+                if(Model.EstadoSeleccion == "1")
+                {
+                    //Buscamos los Usuarios con Rol de Profesor
+                    IdentityRole Profesores = db.Roles.Include(t => t.Users).Where(t => t.Id == ((int)Rol.Profesor).ToString()).FirstOrDefault();
+                    foreach (var item in Profesores.Users)
+                    {
+                        UsuariosPertenecenGrupo upg_actual = db.UsuariosPertenecenGrupos.ToList()
+                                            .Where(t => t.UsuarioId == item.UserId)
+                                            .Where(t => t.GrupoId == Model.Id)
+                                            .Select(t => t).FirstOrDefault();
+
+                        if (upg_actual != null)
+                        {
+                            db.UsuariosPertenecenGrupos.Remove(upg_actual);
+                            db.SaveChanges();
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    bool checkTeacherExistInGroup = (db.UsuariosPertenecenGrupos
+                                                        .Where(t => t.UsuarioId == Model.EstadoSeleccion)
+                                                        .Where(t => t.GrupoId == Model.Id)
+                                                        .FirstOrDefault() == null)? false: true;
+                    if(checkTeacherExistInGroup)
+                    {
+                        try
+                        {
+                            //Si no se ha modificado, el programa ira al catch 
+                            db.Entry(new UsuariosPertenecenGrupo { UsuarioId = Model.EstadoSeleccion, GrupoId = Model.Id }).State = EntityState.Modified;
+                            db.SaveChanges();
+                        }
+                        catch (Exception)
+                        {
+                            //Do nothig
+                        }
+                    }
+                    else if(!checkTeacherExistInGroup)
+                    {
+                        db.UsuariosPertenecenGrupos.Add(new UsuariosPertenecenGrupo { UsuarioId = Model.EstadoSeleccion, GrupoId = Model.Id });
+                        db.SaveChanges();
+                    }
+                }/**/
+                /*db.UsuariosPertenecenGrupos.Add(new UsuariosPertenecenGrupo { UsuarioId = "28c43a6c-41ad-4d0a-8f5c-b60a435ad29c", GrupoId = 17 });
+                db.SaveChanges();*/
+                return Json(new { Result = "OK" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { Result = "ERROR", Message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
 
         #endregion
 

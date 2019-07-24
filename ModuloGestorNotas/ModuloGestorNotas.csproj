@@ -205,6 +205,10 @@
     <Compile Include="Migrations\201907230105512_TriggerAssignRole.Designer.cs">
       <DependentUpon>201907230105512_TriggerAssignRole.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907242141219_NullableNotaId.cs" />
+    <Compile Include="Migrations\201907242141219_NullableNotaId.Designer.cs">
+      <DependentUpon>201907242141219_NullableNotaId.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Grupo.cs" />
@@ -475,6 +479,7 @@
     <Content Include="Views\Grupos\Index.cshtml" />
     <Content Include="Views\Periodos\Index.cshtml" />
     <Content Include="Views\Grupos\estudiantesSeleccionanGrupos.cshtml" />
+    <Content Include="Views\Grupos\administradoresAsignanProfesores.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -513,6 +518,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201907230105512_TriggerAssignRole.resx">
       <DependentUpon>201907230105512_TriggerAssignRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907242141219_NullableNotaId.resx">
+      <DependentUpon>201907242141219_NullableNotaId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
