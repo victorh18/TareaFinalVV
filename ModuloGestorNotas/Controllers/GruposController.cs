@@ -254,14 +254,14 @@ namespace ModuloGestorNotas.Controllers
                                             .Where(t => t.GrupoId == Model.Id)
                                             .Select(t => t).FirstOrDefault();
                 bool checkIsRegisteredInGroup = (upg_actual == null) ? false : true;
-                if (checkIsRegisteredInGroup && (Model.EstadoSeleccion == SolicitudInscripcion.Desinscripcion.ToString()))
+                if (checkIsRegisteredInGroup && (Model.EstadoSeleccion == ((int)SolicitudInscripcion.Desinscripcion).ToString()))
                 {
                     Nota nota = db.Nota.Find(db.UsuariosPertenecenGrupos.Where(t => t.GrupoId == upg_actual.GrupoId).FirstOrDefault().NotaId);
                     db.Nota.Remove(nota);
                     db.UsuariosPertenecenGrupos.Remove(upg_actual);
                     db.SaveChanges();
                 }
-                else if(!checkIsRegisteredInGroup && (Model.EstadoSeleccion == SolicitudInscripcion.Inscripcion.ToString()))
+                else if(!checkIsRegisteredInGroup && (Model.EstadoSeleccion == ((int)SolicitudInscripcion.Inscripcion).ToString()))
                 {
                     Nota nota = new Nota () { PrimerParcial = 0, SegundoParcial = 0, ParcialFinal = 0, NotaTotal = 0 };
                     db.Nota.Add(nota);

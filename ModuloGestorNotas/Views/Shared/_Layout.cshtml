@@ -35,7 +35,7 @@
                         }
                         if (User.IsInRole("Profesor"))
                         {
-                            <li>@Html.ActionLink("Asignar Notas", "", "")</li>
+                            <li>@Html.ActionLink("Calificar Estudiantes", "IndexProfesores", "Notas")</li>
                         }
                         if (User.IsInRole("Estudiante"))
                         {
@@ -52,7 +52,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Modulo Getor de Notas</p>
+            <p>&copy; @DateTime.Now.Year - Modulo Gestor de Notas</p>
         </footer>
     </div>
 

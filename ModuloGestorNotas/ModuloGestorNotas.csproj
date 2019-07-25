@@ -172,6 +172,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MateriasController.cs" />
+    <Compile Include="Controllers\NotasController.cs" />
     <Compile Include="Controllers\PeriodosController.cs" />
     <Compile Include="Controllers\SeccionController.cs" />
     <Compile Include="Global.asax.cs">
@@ -480,6 +481,7 @@
     <Content Include="Views\Periodos\Index.cshtml" />
     <Content Include="Views\Grupos\estudiantesSeleccionanGrupos.cshtml" />
     <Content Include="Views\Grupos\administradoresAsignanProfesores.cshtml" />
+    <Content Include="Views\Notas\IndexProfesores.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

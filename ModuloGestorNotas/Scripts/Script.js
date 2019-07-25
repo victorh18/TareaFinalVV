@@ -223,4 +223,82 @@ $(document).ready(function () {
         }
     });
     $('#TablaAsignacionProfesores').jtable('load');
+
+
+    $('#TablaAsignarCalificaciones').jtable({
+        title: 'Asignar Calificaciones',
+        paging: true,
+        sorting: true,
+        //defaultSorting: 'Name ASC',
+        actions: {
+            listAction: '/Notas/Estudiantes/Get',
+            updateAction: '/Notas/Estudiantes/Edit'
+        },
+        fields: {
+            Id: {
+                key: true,
+                create: false,
+                edit: false,
+                list: false
+            },
+            Nombre: {
+                title: 'Nombre',
+                edit: false
+            },
+            GrupoMateria: {
+                title: 'Grupo',
+                edit: false
+            },
+            PrimerParcial: {
+                title: 'Primer Parcial (35%)',
+                edit: true
+            },
+            SegundoParcial: {
+                title: 'Segundo Parcial (35%)',
+                edit: true
+            },
+            ParcialFinal: {
+                title: 'Parcial Final (30%)',
+                edit: true
+            },
+            NotaTotal: {
+                title: 'Nota Total',
+                edit: false
+            },
+            Literal: {
+                title: 'Literal',
+                width: '2%'
+            }
+        }
+    });
+    $('#TablaAsignarCalificaciones').jtable('load');
+
+    //Re-load records when user click 'load records' button.
+    $('#BuscarNotasProfesor').click(function (e) {
+        e.preventDefault();
+        $('#TablaAsignarCalificaciones').jtable('load', {
+            Nombre: $('#NombreSearch').val(),
+            GrupoMateria: $('#MateriaIdSearch').val()
+        });
+    });
+
+    //Carga Estudiantes para asignar Notas
+    $.ajax({
+        url: '/Materias/GetMaterias/Profesor',
+        type: 'get',
+        success: function (data) {
+            var Materias = data.Options;
+            $.each(Materias, function (item) {
+                //Use the Option() constructor to create a new HTMLOptionElement.
+                var option = new Option(Materias[item].DisplayText, Materias[item].Value);
+                //Convert the HTMLOptionElement into a JQuery object that can be used with the append method.
+                $(option).html(Materias[item].DisplayText, Materias[item].Value);
+                //Append the option to our Select element.
+                $("#MateriaIdSearch").append(option);
+            });
+        }
+    });
+    /*
+     */
+
 });

@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Calificar Estudiantes";
+}
+
+<h2>Calificar Estudiantes</h2>
+    
+<div id="TablaAsignarCalificaciones">
+<!--
+-->
+    <div class="jtable-main-container">
+        <div class="jtable-bottom-panel">
+            <div class="jtable-left-area">
+                <span class="jtable-page-list"></span>
+                <span class="jtable-page-list form-inline">
+                    <span>Estudiante: </span>
+                    <input class="form-control" type="text" name="NombreSearch" id="NombreSearch" />
+                </span>
+                <span class="jtable-page-list form-inline">
+                    <span>Materia:</span>
+                    <select class="form-control" id="MateriaIdSearch" name="MateriaIdSearch">
+                        <option selected="selected" value="0">Todas las materias</option>
+                    </select>
+                </span>
+                <span class="jtable-page-list form-inline">
+                    <button class="btn btn-sm btn-info" type="submit" id="BuscarNotasProfesor">Buscar</button>
+                </span>
+                <span class="jtable-page-list form-inline" >
+                    <p class="btn-lg" style="visibility:hidden">.</p>
+                </span>
+            </div>
+            <div class="jtable-right-area">
+                <span class="jtable-page-info"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <!--Adding Theme for jTable Grid-->
+    <!--You can choose any type of theme from the themes folder-->
+    <link href="~/Scripts/jtable/themes/metro/blue/jtable.min.css" rel="stylesheet" />
+    @*<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" />*@
+    <link href="http://jtable.org/Content/themes/metroblue/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/jquery-ui-1.9.2.min.js"></script>
+
+    <!--Añadiendo jTable Plugin-->
+    <script src="~/Scripts/jtable/jquery.jtable.min.js"></script>
+
+    <!--Añadiendo mi script-->
+    <script src="~/Scripts/Script.js"></script>
+}
+
