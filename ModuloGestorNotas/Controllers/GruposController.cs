@@ -137,6 +137,17 @@ namespace ModuloGestorNotas.Controllers
             ApplicationDbContext db = new ApplicationDbContext();
             try
             {
+                var groupExists = db.Grupo.Any(x => x.MateriaId.Equals(Model.MateriaId) &&
+                                                    x.PeriodoId.Equals(Model.PeriodoId) &&
+                                                    x.SeccionId.Equals(Model.SeccionId) &&
+                                                    x.Codigo.Equals(Model.Codigo));
+
+                if (groupExists)
+                {
+                    return Json(new { Result = "ERROR", Message = "Grupo Existente" });
+
+                }
+
                 db.Grupo.Add(Model);
                 db.SaveChanges();
                 return Json(new { Result = "OK", Record = Model }, JsonRequestBehavior.AllowGet);
@@ -257,9 +268,14 @@ namespace ModuloGestorNotas.Controllers
                 if (checkIsRegisteredInGroup && (Model.EstadoSeleccion == ((int)SolicitudInscripcion.Desinscripcion).ToString()))
                 {
                     Nota nota = db.Nota.Find(db.UsuariosPertenecenGrupos.Where(t => t.GrupoId == upg_actual.GrupoId).FirstOrDefault().NotaId);
-                    db.Nota.Remove(nota);
-                    db.UsuariosPertenecenGrupos.Remove(upg_actual);
-                    db.SaveChanges();
+
+                    if (nota != null)
+                    {
+                        db.Nota.Remove(nota);
+                        db.UsuariosPertenecenGrupos.Remove(upg_actual);
+                        db.SaveChanges();
+                    }
+                    
                 }
                 else if(!checkIsRegisteredInGroup && (Model.EstadoSeleccion == ((int)SolicitudInscripcion.Inscripcion).ToString()))
                 {
