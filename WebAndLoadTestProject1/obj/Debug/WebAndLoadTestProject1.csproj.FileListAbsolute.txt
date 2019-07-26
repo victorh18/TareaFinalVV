@@ -1,0 +1,10 @@
+C:\Workspace\tareas\TareaFinalVV\WebAndLoadTestProject1\bin\Debug\WebTest1.webtest
+C:\Workspace\tareas\TareaFinalVV\WebAndLoadTestProject1\bin\Debug\Notes.loadtest
+C:\Workspace\tareas\TareaFinalVV\WebAndLoadTestProject1\bin\Debug\WebAndLoadTestProject1.dll
+C:\Workspace\tareas\TareaFinalVV\WebAndLoadTestProject1\bin\Debug\WebAndLoadTestProject1.pdb
+C:\Workspace\tareas\TareaFinalVV\WebAndLoadTestProject1\bin\Debug\Microsoft.VisualStudio.QualityTools.WebTestFramework.dll
+C:\Workspace\tareas\TareaFinalVV\WebAndLoadTestProject1\obj\Debug\WebAndLoadTestProject1.csprojAssemblyReference.cache
+C:\Workspace\tareas\TareaFinalVV\WebAndLoadTestProject1\obj\Debug\WebAndLoadTestProject1.csproj.CoreCompileInputs.cache
+C:\Workspace\tareas\TareaFinalVV\WebAndLoadTestProject1\obj\Debug\WebAndLoadTestProject1.csproj.CopyComplete
+C:\Workspace\tareas\TareaFinalVV\WebAndLoadTestProject1\obj\Debug\WebAndLoadTestProject1.dll
+C:\Workspace\tareas\TareaFinalVV\WebAndLoadTestProject1\obj\Debug\WebAndLoadTestProject1.pdb
