@@ -54,6 +54,13 @@ namespace ModuloGestorNotas.Controllers
             ApplicationDbContext db = new ApplicationDbContext();
             try
             {
+                var subjectExist = db.Materia.Any(x => x.Nombre.Equals(Model.Nombre));
+                if (subjectExist)
+                {
+                    return Json(new { Result = "ERROR", Message = "Materia Existente" });
+
+                }
+                
                 db.Materia.Add(Model);
                 db.SaveChanges();
                 return Json(new { Result = "OK", Record = Model }, JsonRequestBehavior.AllowGet);
