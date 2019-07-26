@@ -482,6 +482,7 @@
     <Content Include="Views\Grupos\estudiantesSeleccionanGrupos.cshtml" />
     <Content Include="Views\Grupos\administradoresAsignanProfesores.cshtml" />
     <Content Include="Views\Notas\IndexProfesores.cshtml" />
+    <Content Include="Views\Notas\IndexEstudiantes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
