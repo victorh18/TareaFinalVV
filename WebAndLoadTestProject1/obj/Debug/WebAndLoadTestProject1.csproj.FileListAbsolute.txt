@@ -8,3 +8,12 @@ C:\Workspace\tareas\TareaFinalVV\WebAndLoadTestProject1\obj\Debug\WebAndLoadTest
 C:\Workspace\tareas\TareaFinalVV\WebAndLoadTestProject1\obj\Debug\WebAndLoadTestProject1.csproj.CopyComplete
 C:\Workspace\tareas\TareaFinalVV\WebAndLoadTestProject1\obj\Debug\WebAndLoadTestProject1.dll
 C:\Workspace\tareas\TareaFinalVV\WebAndLoadTestProject1\obj\Debug\WebAndLoadTestProject1.pdb
+D:\projects\TareaFinalVV\WebAndLoadTestProject1\bin\Debug\WebTest1.webtest
+D:\projects\TareaFinalVV\WebAndLoadTestProject1\bin\Debug\Notes.loadtest
+D:\projects\TareaFinalVV\WebAndLoadTestProject1\bin\Debug\WebAndLoadTestProject1.dll
+D:\projects\TareaFinalVV\WebAndLoadTestProject1\bin\Debug\WebAndLoadTestProject1.pdb
+D:\projects\TareaFinalVV\WebAndLoadTestProject1\obj\Debug\WebAndLoadTestProject1.csprojAssemblyReference.cache
+D:\projects\TareaFinalVV\WebAndLoadTestProject1\obj\Debug\WebAndLoadTestProject1.csproj.CoreCompileInputs.cache
+D:\projects\TareaFinalVV\WebAndLoadTestProject1\obj\Debug\WebAndLoadTestProject1.csproj.CopyComplete
+D:\projects\TareaFinalVV\WebAndLoadTestProject1\obj\Debug\WebAndLoadTestProject1.dll
+D:\projects\TareaFinalVV\WebAndLoadTestProject1\obj\Debug\WebAndLoadTestProject1.pdb
