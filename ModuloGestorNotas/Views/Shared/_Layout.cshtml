@@ -40,7 +40,7 @@
                         if (User.IsInRole("Estudiante"))
                         {
                             <li>@Html.ActionLink("Seleccion de Materias", "estudiantesSeleccionanGrupos", "Grupos")</li>
-                            <li>@Html.ActionLink("Ver Notas", "", "")</li>
+                            <li>@Html.ActionLink("Consultar Calificaciones", "IndexEstudiantes", "Notas")</li>
                         }
                     }
                 </ul>

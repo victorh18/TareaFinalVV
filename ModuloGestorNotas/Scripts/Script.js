@@ -263,11 +263,13 @@ $(document).ready(function () {
             },
             NotaTotal: {
                 title: 'Nota Total',
+                width: '1%',
                 edit: false
             },
             Literal: {
                 title: 'Literal',
-                width: '2%'
+                width: '2%',
+                edit: false
             }
         }
     });
@@ -300,5 +302,80 @@ $(document).ready(function () {
     });
     /*
      */
+
+    $('#TablaConsultarCalificaciones').jtable({
+        title: 'Consultar Calificaciones',
+        paging: true,
+        sorting: true,
+        //defaultSorting: 'Name ASC',
+        actions: {
+            listAction: '/Notas/Get'
+        },
+        fields: {
+            Id: {
+                key: true,
+                create: false,
+                edit: false,
+                list: false
+            },
+            GrupoMateria: {
+                title: 'Materia',
+                edit: false
+            },
+            Nombre: {
+                title: 'Cuatrimestre',
+                edit: false
+            },
+
+            PrimerParcial: {
+                title: 'Primer Parcial (35%)',
+                edit: true
+            },
+            SegundoParcial: {
+                title: 'Segundo Parcial (35%)',
+                edit: true
+            },
+            ParcialFinal: {
+                title: 'Parcial Final (30%)',
+                edit: true
+            },
+            NotaTotal: {
+                title: 'Nota Total',
+                width: '1%',
+                edit: false
+            },
+            Literal: {
+                title: 'Literal',
+                width: '2%',
+                edit: false
+            }
+        }
+    });
+    $('#TablaConsultarCalificaciones').jtable('load');
+
+    //Re-load records when user click 'load records' button.
+    $('#BuscarNotasEstudiante').click(function (e) {
+        e.preventDefault();
+        $('#TablaConsultarCalificaciones').jtable('load', {
+            Nombre: $('#PeriodoIdSearch').val()
+        });
+    });
+
+    //Carga Periodos para la consulta de las notas por parte de los estudiantes
+    $.ajax({
+        url: '/Periodos/GetPeriodos/Estudiante',
+        type: 'get',
+        success: function (data) {
+            var Materias = data.Options;
+            $.each(Materias, function (item) {
+                //Use the Option() constructor to create a new HTMLOptionElement.
+                var option = new Option(Materias[item].DisplayText, Materias[item].Value);
+                //Convert the HTMLOptionElement into a JQuery object that can be used with the append method.
+                $(option).html(Materias[item].DisplayText, Materias[item].Value);
+                //Append the option to our Select element.
+                $("#PeriodoIdSearch").append(option);
+            });
+        }
+    });
 
 });
