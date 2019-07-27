@@ -10,7 +10,7 @@ using ModuloGestorNotas.Models;
 
 namespace ModuloGestorNotas.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class ManageController : Controller
     {
         private ApplicationSignInManager _signInManager;

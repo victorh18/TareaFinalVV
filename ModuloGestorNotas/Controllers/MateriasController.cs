@@ -12,13 +12,13 @@ namespace ModuloGestorNotas.Controllers
     public class MateriasController : Controller
     {
         // GET: Materias
-        [Authorize(Roles = "SuperAdmin")]
+        //[Authorize(Roles = "SuperAdmin")]
         public ActionResult Index()
         {
             return View();
         }
 
-        [Authorize(Roles = "SuperAdmin")]
+        //[Authorize(Roles = "SuperAdmin")]
         public JsonResult Get(int jtStartIndex = 0, int jtPageSize = 0, string jtSorting = null)
         {
             ApplicationDbContext db = new ApplicationDbContext();

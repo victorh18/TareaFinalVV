@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WebTest Name="Materias" Id="b0cecb0e-09bf-4eff-851e-aa06885f6358" Owner="" Priority="2147483647" Enabled="True" CssProjectStructure="" CssIteration="" Timeout="0" WorkItemIds="" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" Description="" CredentialUserName="" CredentialPassword="" PreAuthenticate="True" Proxy="default" StopOnError="False" RecordedResultFile="" ResultsLocale="">
+  <Items>
+    <Request Method="GET" Guid="63b67186-1661-4c6d-a173-68df91f24e09" Version="1.1" Url="https://localhost:44365/Materias" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="Cookie" Value="__RequestVerificationToken=FIx-cCNqLYHXp-VRHA3K3Q0uJ4qg7iqOn5jpz9obU2LLaHsCpVcsB8-MbI0voOa2gwKk5q6pf2Xow0b6tfn7pHpZLnHet9OWgphoZuDQoSw1; .AspNet.ApplicationCookie=MADr8a129SXpfcCZVmeRECeYj5SHdR4_0-X_MHtlPNxsAdWmIES3r_Mluj-eZ7xR7Qsy-iCUCdgLNb9Mbq2gLh2ti-Ax2pW-M4ZlwIS3wly5Li7qeWQpnY1QD8GRpHZj86sk0fn8XHTE2nPCcPLiItGjxjDia8OAffnUICvKX86d44FpQYokUYdvyUe1ZV9MLG888L0DnLkdFhDyKDOYVYblMdjqaZiWw_A0Y_YHimzMK9uipL-MWQAo9Qs971lju8pwE-ehdsiyQetPzuqxIghMheyqnqiBn5Ei-aG4RTwGYqW0LIBi9Op47ZN2nbeP4hVDgHMH-2_3YllaCGSbGbuPh62UMTXLXP57DlyU5QrdjCRf2f2VrJVzo3HXMMtSOVG18dlhG5irVCJzqNwmYubpdxHqfOQIvDXb0zTREP6ZPzGyyl-nof3VjnNkLX49iZsjqH6q_SH58uQbAZ3BB5fGr_2CmjuP9S4tPbsh9sGZm1aiyGQ9z5mcn2Vm02Y16p-KJmRHO0LGr90-hoexW75LMCs9FG6fumtd5j52OVU" />
+      </Headers>
+    </Request>
+  </Items>
+  <ValidationRules>
+    <ValidationRule Classname="Microsoft.VisualStudio.TestTools.WebTesting.Rules.ValidateResponseUrl, Microsoft.VisualStudio.QualityTools.WebTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" DisplayName="Response URL" Description="Validates that the response URL after redirects are followed is the same as the recorded response URL.  QueryString parameters are ignored." Level="Low" ExectuionOrder="BeforeDependents" />
+    <ValidationRule Classname="Microsoft.VisualStudio.TestTools.WebTesting.Rules.ValidationRuleResponseTimeGoal, Microsoft.VisualStudio.QualityTools.WebTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" DisplayName="Response Time Goal" Description="Validates that the response time for the request is less than or equal to the response time goal as specified on the request.  Response time goals of zero will be ignored." Level="Low" ExectuionOrder="AfterDependents">
+      <RuleParameters>
+        <RuleParameter Name="Tolerance" Value="0" />
+      </RuleParameters>
+    </ValidationRule>
+  </ValidationRules>
+</WebTest>

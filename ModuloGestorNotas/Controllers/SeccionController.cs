@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace ModuloGestorNotas.Controllers
 {
-    [Authorize(Roles = "SuperAdmin")]
+    //[Authorize(Roles = "SuperAdmin")]
     public class SeccionController : Controller
     {
         // GET: Seccion

@@ -1,0 +1,12 @@
+C:\Workspace\tareas\TareaFinalVV\ModuloGestorNotasTestLoad\bin\Debug\WebTest1.webtest
+C:\Workspace\tareas\TareaFinalVV\ModuloGestorNotasTestLoad\bin\Debug\ModuloGestorNotasTestLoad.dll
+C:\Workspace\tareas\TareaFinalVV\ModuloGestorNotasTestLoad\bin\Debug\ModuloGestorNotasTestLoad.pdb
+C:\Workspace\tareas\TareaFinalVV\ModuloGestorNotasTestLoad\bin\Debug\Microsoft.VisualStudio.QualityTools.WebTestFramework.dll
+C:\Workspace\tareas\TareaFinalVV\ModuloGestorNotasTestLoad\obj\Debug\ModuloGestorNotasTestLoad.csprojAssemblyReference.cache
+C:\Workspace\tareas\TareaFinalVV\ModuloGestorNotasTestLoad\obj\Debug\ModuloGestorNotasTestLoad.csproj.CoreCompileInputs.cache
+C:\Workspace\tareas\TareaFinalVV\ModuloGestorNotasTestLoad\obj\Debug\ModuloGestorNotasTestLoad.csproj.CopyComplete
+C:\Workspace\tareas\TareaFinalVV\ModuloGestorNotasTestLoad\obj\Debug\ModuloGestorNotasTestLoad.dll
+C:\Workspace\tareas\TareaFinalVV\ModuloGestorNotasTestLoad\obj\Debug\ModuloGestorNotasTestLoad.pdb
+C:\Workspace\tareas\TareaFinalVV\ModuloGestorNotasTestLoad\bin\Debug\LoadTest1.loadtest
+C:\Workspace\tareas\TareaFinalVV\ModuloGestorNotasTestLoad\bin\Debug\Secciones.webtest
+C:\Workspace\tareas\TareaFinalVV\ModuloGestorNotasTestLoad\bin\Debug\Materias.webtest

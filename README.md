@@ -8,4 +8,7 @@ Gestor de Notas
   {Id: 3, Name: "Estudiante"}
 }
 
-
+- Sinver Aguilo 2018-1042
+- Juan Cesar Matos 2018-1500
+- Victor De la Rosa 2018-1827
+- Fausto Rodriguez 2018-1507

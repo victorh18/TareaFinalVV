@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<TestSettings name="Local" id="f27b282b-64c1-4927-9dba-6606cf9c36e4" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+<TestSettings name="Local" id="f86bb67b-05cb-4886-ab17-a0f9d915b4c7" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
   <Description>These are default test settings for a local test run.</Description>
   <Deployment enabled="false" />
   <Execution hostProcessPlatform="MSIL">
@@ -8,6 +8,6 @@
     </AgentRule>
   </Execution>
   <Properties>
-    <Property name="TestSettingsUIType" value="UnitTest" />
+    <Property name="TestSettingsUIType" value="LoadTest" />
   </Properties>
 </TestSettings>
