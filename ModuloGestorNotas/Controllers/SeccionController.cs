@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 
 namespace ModuloGestorNotas.Controllers
 {
@@ -52,6 +53,12 @@ namespace ModuloGestorNotas.Controllers
             ApplicationDbContext db = new ApplicationDbContext();
             try
             {
+                var sectionExits = db.Seccion.Any(x => x.Nombre.Equals(Model.Nombre));
+                if (sectionExits)
+                {
+                    return Json(new { Result = "ERROR", Message = "Seccion Existente" });
+
+                }
                 db.Seccion.Add(Model);
                 db.SaveChanges();
                 return Json(new { Result = "OK", Record = Model }, JsonRequestBehavior.AllowGet);

@@ -137,6 +137,17 @@ namespace ModuloGestorNotas.Controllers
             ApplicationDbContext db = new ApplicationDbContext();
             try
             {
+                var groupExists = db.Grupo.Any(x => x.MateriaId.Equals(Model.MateriaId) &&
+                                                    x.PeriodoId.Equals(Model.PeriodoId) &&
+                                                    x.SeccionId.Equals(Model.SeccionId) &&
+                                                    x.Codigo.Equals(Model.Codigo));
+
+                if (groupExists)
+                {
+                    return Json(new { Result = "ERROR", Message = "Grupo Existente" });
+
+                }
+
                 db.Grupo.Add(Model);
                 db.SaveChanges();
                 return Json(new { Result = "OK", Record = Model }, JsonRequestBehavior.AllowGet);
@@ -249,29 +260,47 @@ namespace ModuloGestorNotas.Controllers
             ApplicationDbContext db = new ApplicationDbContext();
             try
             {
+                var groupOg = db.Grupo.SingleOrDefault(x => x.Id.Equals(Model.Id));
+                if (groupOg == null)
+                {
+                    return Json(new {Result = "ERROR", Message = "Grupo no Existente"});
+                }
+                
                 UsuariosPertenecenGrupo upg_actual = db.UsuariosPertenecenGrupos.ToList()
                                             .Where(t => t.UsuarioId == User.Identity.GetUserId())
                                             .Where(t => t.GrupoId == Model.Id)
                                             .Select(t => t).FirstOrDefault();
+
                 bool checkIsRegisteredInGroup = (upg_actual == null) ? false : true;
                 if (checkIsRegisteredInGroup && (Model.EstadoSeleccion == ((int)SolicitudInscripcion.Desinscripcion).ToString()))
                 {
                     Nota nota = db.Nota.Find(db.UsuariosPertenecenGrupos.Where(t => t.GrupoId == upg_actual.GrupoId).FirstOrDefault().NotaId);
-                    db.Nota.Remove(nota);
+
+                    if (nota != null)
+                    {
+                        db.Nota.Remove(nota);
+                        
+                    }
+
                     db.UsuariosPertenecenGrupos.Remove(upg_actual);
                     db.SaveChanges();
+
                 }
                 else if(!checkIsRegisteredInGroup && (Model.EstadoSeleccion == ((int)SolicitudInscripcion.Inscripcion).ToString()))
                 {
+                    var gruposEstudiante = db.UsuariosPertenecenGrupos.Include(a => a.Grupo.Materia)
+                        .Where(x => x.UsuarioId.Equals(current_id)).ToList();
+
+                    if (gruposEstudiante.Any(x => x.Grupo.Materia.Nombre.Equals(groupOg.Materia.Nombre)))
+                    {
+                        return Json(new { Result = "ERROR", Message = "Materia Previamente Inscrita" });
+                    }
+
                     Nota nota = new Nota () { PrimerParcial = 0, SegundoParcial = 0, ParcialFinal = 0, NotaTotal = 0 };
                     db.Nota.Add(nota);
                     db.SaveChanges();
                     db.UsuariosPertenecenGrupos.Add(new UsuariosPertenecenGrupo { GrupoId = Model.Id, UsuarioId = current_id, NotaId = nota.Id});
                     db.SaveChanges();
-                }
-                else
-                {
-                    //Console.WriteLine("Do Nothing");
                 }
 
                 return Json(new { Result = "OK" }, JsonRequestBehavior.AllowGet);
